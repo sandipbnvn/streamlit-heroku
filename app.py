@@ -1,17 +1,31 @@
 import streamlit as st
+import pandas as pd
 
-st.write('''
-#App for Substracting 2 Numbers
-''')
 
-#Get input
+st.write("""
+# App for Substraction
 
-st.header('Number input:')
-first_num = st.number_input('FIRST_NUMBER')
-second_num = st.number_input('SECOND_NUMBER')
-  
+This app substracts the second number from the first number
+""")
+#Get Input
 
-result = first_num-second_num
+st.header('User Input Parameters')
 
+def user_input_features():
+    num1 = st.number_input("NUM1")
+    num2 = st.number_input("NUM2")
+
+    data = {"NUM1":num1,
+            "NUM2":num2
+            }
+    features = pd.DataFrame(data, index=[0])
+    return features
+
+df = user_input_features()
+
+st.subheader('User Input parameters')
+st.write(df.to_dict())
+
+result = df.iloc[0,0]-df.iloc[0,1]
 st.subheader('Result')
 st.write(result)
